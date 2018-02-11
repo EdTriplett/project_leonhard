@@ -34,5 +34,5 @@ let longestCollatzSequence = (maxStart) => {
   return cache.indexOf(Math.max(cache))
 }
 
-// NOT passing
+// NOT passing yet
 console.log(longestCollatzSequence(1000000))
