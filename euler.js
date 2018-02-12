@@ -672,13 +672,14 @@ let collatzIteration = (num) => num%2 ? num*3+1 : num/2
 
 let longestCollatzSequence = (maxStart) => {
   let cache = new Array(maxStart + 1)
+  let cache[0] = 1
   for (let i = 2; i <= maxStart; i++) {
     let num = i, count = 1
     while (num >= i) {
       num = collatzIteration(num)
       count += 1
     }
-    cache[i] = cache[num] ? count + cache[num] - 1 : count
+    cache[i] = count + cache[num] - 1
   }
   return cache.indexOf(Math.max(cache))
 }

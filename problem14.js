@@ -21,18 +21,39 @@ NOTE: Once the chain starts the terms are allowed to go above one million.
 let collatzIteration = (num) => num%2 ? num*3+1 : num/2
 
 let longestCollatzSequence = (maxStart) => {
-  let cache = new Array(maxStart + 1)
-  for (let i = 2; i <= maxStart; i++) {
-    let num = i, count = 1
-    while (num >= i) {
-      num = collatzIteration(num)
+  let cache = new Array(maxStart + 1), longestSeqCount = 0, longestSeqStart = 0
+  cache[1] = 1
+
+  outer : for (let i = 2; i <= maxStart; i++) {
+    let num = i, count = 1, memo = {}, memoCount = 0
+
+    inner: while (num >= i) {
+      if (cache[num]) {
+        break inner
+      }
       count += 1
+      memoCount -= 1 //will be subtracted from final count of i's Collatz sequence
+      memo[num.toString()] = memoCount
+      num = collatzIteration(num)
+      if (num === i) { //goes after first Collatz iteration
+        console.log('We found a loop!  Somebody call the Fields committee!  Paul Erdős (\'s estate) owes me $500!')
+        console.log('The sequence containing the loop begins with ' + i)
+        cache[i] = "LOOP!"
+        return i
+      }
     }
-    cache[i] = cache[num] ? count + cache[num] - 1 : count
+
+    cache[i] = count + cache[num] - 1
+    Object.keys(memo).forEach(key => {
+      cache[key] = memo[key] + count
+    })
+    if (cache[i] > longestSeqCount) {
+      longestSeqCount = cache[i]
+      longestSeqStart = i
+    }
   }
-  console.log(Math.max(cache))
-  return cache.indexOf(Math.max(cache))
+  return longestSeqStart
 }
 
-// NOT passing yet
-console.log(longestCollatzSequence(1000000))
+
+console.log(longestCollatzSequence(10))
