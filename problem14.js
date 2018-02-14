@@ -36,7 +36,7 @@ let longestCollatzSequence = (maxStart) => {
       memo[num.toString()] = memoCount
       num = collatzIteration(num)
       if (num === i) { //goes after first Collatz iteration
-        console.log('We found a loop!  Somebody call the Fields committee!  Paul Erdős (\'s estate) owes me $500!')
+        console.log('We found a loop!  Somebody call the Fields committee!  Paul Erdős owes me $500!')
         console.log('The sequence containing the loop begins with ' + i)
         cache[i] = "LOOP!"
         return i
