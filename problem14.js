@@ -28,12 +28,12 @@ let longestCollatzSequence = (maxStart) => {
     let num = i, count = 1, memo = {}, memoCount = 0
 
     inner: while (num >= i) {
-      if (cache[num]) {
-        break inner
-      }
+      // if (cache[num]) {
+      //   break inner
+      // }
       count += 1
-      memoCount -= 1 //will be subtracted from final count of i's Collatz sequence
-      memo[num.toString()] = memoCount
+    //  memoCount -= 1 //will be subtracted from final count of i's Collatz sequence
+    //  memo[num.toString()] = memoCount
       num = collatzIteration(num)
       if (num === i) { //goes after first Collatz iteration
         console.log('We found a loop!  Somebody call the Fields committee!  Paul Erdős owes me $500!')
@@ -44,9 +44,9 @@ let longestCollatzSequence = (maxStart) => {
     }
 
     cache[i] = count + cache[num] - 1
-    Object.keys(memo).forEach(key => {
-      cache[key] = memo[key] + count
-    })
+    // Object.keys(memo).forEach(key => {
+    //   cache[key] = memo[key] + count
+    // })
     if (cache[i] > longestSeqCount) {
       longestSeqCount = cache[i]
       longestSeqStart = i
@@ -56,4 +56,4 @@ let longestCollatzSequence = (maxStart) => {
 }
 
 
-console.log(longestCollatzSequence(10))
+console.log(longestCollatzSequence(1000000))
