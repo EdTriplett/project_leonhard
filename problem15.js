@@ -17,4 +17,5 @@ let latticePathCount = (lengthOfSide) => {
   return count
 }
 //NOT passing yet
+
 console.log(latticePathCount(20))
