@@ -6,8 +6,7 @@ Starting in the top left corner of a 2×2 grid, and only being able to move to t
 How many such routes are there through a 20×20 grid?
 */
 
-// 6 = 2^1 + 2^2
-// #ofPaths = sum of 2^(series of numbers 1...lengthOfSide)
+// (n+k)! / (k!*(n-k)!)
 
 let latticePathCount = (lengthOfSide) => {
   let count = 0
@@ -16,6 +15,6 @@ let latticePathCount = (lengthOfSide) => {
   }
   return count
 }
-//NOT passing yet
+//NOT passing
 
 console.log(latticePathCount(20))
