@@ -716,15 +716,31 @@ Starting in the top left corner of a 2×2 grid, and only being able to move to t
 How many such routes are there through a 20×20 grid?
 */
 
-// 6 = 2^1 + 2^2
-// #ofPaths = sum of 2^(series of numbers 1...lengthOfSide)
+// (a + b) choose b (where b is lesser)
 
-let latticePathCount = (lengthOfSide) => {
-  let count = 0
-  for (let i = 1; i<=lengthOfSide; i++){
-    count += Math.pow(2, i)
+// = (a+b)! / b! * (a+b-b)!
+
+// = (a+b)! / b!*a!
+
+// since a = b, this = (2a)! / (a!^2)
+
+let factorial = num => {
+  if (num % 1) {
+    console.log("error, only positive integers can be factorialized")
+    return "error, only positive integers can be factorialized"
   }
-  return count
+  if (num < 0) {
+    console.log("error, only positive integers can be factorialized")
+    return "error, only positive integers can be factorialized"
+  }
+  if (num === 0) {
+    return 1
+  }
+  else {
+    return num * factorial(num-1)
+  }
 }
 
-console.log(latticePathCount(20))
+let southEastLatticePathCount = nodesPerSide => factorial(2 * nodesPerSide) / Math.pow(factorial(nodesPerSide), 2)
+
+console.log(southEastLatticePathCount(20))
