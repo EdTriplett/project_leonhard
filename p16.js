@@ -17,5 +17,7 @@ let powerDigitSum = num => {
 }
 
 let input = Math.pow(2, 1000)
+// too many significant digits
+console.log('input = ', input)
 
 console.log(powerDigitSum(input))
